@@ -22,7 +22,7 @@ with st.sidebar:
 # change type str/obj -> datetime
 datetime_columns = ["order_approved_at"]
 for column in datetime_columns:
-    all_df['order_approved_at'] = pd.to_datetime(all_df['order_approved_at'], errors='coerce')
+    aall_df[column] = pd.to_datetime(all_df[column])
 
 
 
