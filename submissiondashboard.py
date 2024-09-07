@@ -19,37 +19,10 @@ with st.sidebar:
         icons=['calendar', "bar-chart", 'clipboard-check','clock','grid'], menu_icon="cast", default_index=0)
     selected
     
-# Memeriksa kolom yang ada
-print(all_df.columns)
-
-# Memastikan kolom order_approved_at ada dan dalam format datetime
-if 'order_approved_at' in all_df.columns:
-    all_df['order_approved_at'] = pd.to_datetime(all_df['order_approved_at'], errors='coerce')
-    all_df = all_df.dropna(subset=['order_approved_at'])  # Menghapus baris dengan nilai NaN
-    print(all_df[['order_approved_at']].head())  # Debugging nilai
-else:
-    print("Kolom 'order_approved_at' tidak ditemukan!")
-def number_order_per_month(df):
-    # Memastikan kolom 'order_approved_at' ada dan dalam format datetime
-    if 'order_approved_at' in df.columns:
-        df['order_approved_at'] = pd.to_datetime(df['order_approved_at'], errors='coerce')
-        df = df.dropna(subset=['order_approved_at'])
-        
-        # Melakukan resampling bulanan
-        monthly_df = df.resample(rule='M', on='order_approved_at').agg({
-            'order_id': 'count',  # Hitung jumlah pesanan
-            'payment_value': 'sum'  # Total nilai pembayaran
-        }).reset_index()
-        
-        monthly_df.rename(columns={'order_id': 'total_orders', 'payment_value': 'total_value'}, inplace=True)
-        return monthly_df
-    else:
-        raise KeyError("Kolom 'order_approved_at' tidak ditemukan dalam DataFrame!")
-
-
-
-
-
+# change type str/obj -> datetime
+datetime_columns = ["order_approved_at"]
+for column in datetime_columns:
+    all_df[column] = pd.to_datetime(all_df[column])
 
 
 def number_order_per_month(df):
