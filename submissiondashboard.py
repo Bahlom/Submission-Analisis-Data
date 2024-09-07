@@ -30,8 +30,7 @@ if 'order_approved_at' in all_df.columns:
 else:
     print("Kolom 'order_approved_at' tidak ditemukan!")
 
-# Melanjutkan ke resampling
-daily_orders_df = number_order_per_month(all_df)
+
 
 
 
@@ -54,7 +53,8 @@ def number_order_per_month(df):
     monthly_df = monthly_df.sort_values("month_numeric")
     monthly_df = monthly_df.drop("month_numeric", axis=1)
     return monthly_df 
-
+# Melanjutkan ke resampling
+daily_orders_df = number_order_per_month(all_df)
 def create_by_product_df(df):
     product_id_counts = df.groupby('product_category_name_english')['product_id'].count().reset_index()
     sorted_df = product_id_counts.sort_values(by='product_id', ascending=False)
