@@ -18,6 +18,11 @@ with st.sidebar:
     selected = option_menu("Main Menu", ["Order Bulanan", "Performa Produk", 'Status Pesanan','Waktu Pengiriman', 'RFM Analisis'], 
         icons=['calendar', "bar-chart", 'clipboard-check','clock','grid'], menu_icon="cast", default_index=0)
     selected
+    
+# change type str/obj -> datetime
+datetime_columns = ["order_approved_at"]
+for column in datetime_columns:
+    all_df[column] = pd.to_datetime(all_df[column])
 
 
 
