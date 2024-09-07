@@ -16,9 +16,6 @@ url = "https://media.githubusercontent.com/media/Bahlom/Submission-Analisis-Data
 # Membaca dataset
 all_df = pd.read_csv(url)
 
-# Menampilkan beberapa baris pertama untuk memastikan data sudah ter-load
-st.write("Data sampel dari dataset:")
-st.dataframe(all_df.head())
 
 
 with st.sidebar:
