@@ -10,8 +10,16 @@ import datetime as dt
 from streamlit_option_menu import option_menu
 
 
+# URL dataset dari GitHub
+url = "https://media.githubusercontent.com/media/Bahlom/Submission-Analisis-Data/main/all_data.csv"
 
-all_df = pd.read_csv('all_data.csv')
+# Membaca dataset
+all_df = pd.read_csv(url)
+
+# Menampilkan beberapa baris pertama untuk memastikan data sudah ter-load
+st.write("Data sampel dari dataset:")
+st.dataframe(all_df.head())
+
 
 with st.sidebar:
     st.image("https://github.com/dicodingacademy/assets/raw/main/logo.png")
