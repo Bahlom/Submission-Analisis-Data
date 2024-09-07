@@ -19,10 +19,6 @@ with st.sidebar:
         icons=['calendar', "bar-chart", 'clipboard-check','clock','grid'], menu_icon="cast", default_index=0)
     selected
 
-# change type str/obj -> datetime
-datetime_columns = ["order_approved_at"]
-for column in datetime_columns:
-    all_df[column] = pd.to_datetime(all_df[column])
 
 
 def number_order_per_month(df):
