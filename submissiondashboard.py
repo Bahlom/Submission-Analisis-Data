@@ -7,7 +7,6 @@ import zipfile
 import streamlit as st
 import unidecode
 import datetime as dt
-from babel.numbers import format_currency
 from streamlit_option_menu import option_menu
 
 
