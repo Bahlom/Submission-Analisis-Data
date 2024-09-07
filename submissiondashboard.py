@@ -19,10 +19,20 @@ with st.sidebar:
         icons=['calendar', "bar-chart", 'clipboard-check','clock','grid'], menu_icon="cast", default_index=0)
     selected
     
+# Memeriksa kolom yang ada
+print(all_df.columns)
+
+# Memastikan kolom order_approved_at ada dan dalam format datetime
 if 'order_approved_at' in all_df.columns:
     all_df['order_approved_at'] = pd.to_datetime(all_df['order_approved_at'], errors='coerce')
+    all_df = all_df.dropna(subset=['order_approved_at'])  # Menghapus baris dengan nilai NaN
+    print(all_df[['order_approved_at']].head())  # Debugging nilai
 else:
     print("Kolom 'order_approved_at' tidak ditemukan!")
+
+# Melanjutkan ke resampling
+daily_orders_df = number_order_per_month(all_df)
+
 
 
 
