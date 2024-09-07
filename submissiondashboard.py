@@ -19,6 +19,10 @@ with st.sidebar:
         icons=['calendar', "bar-chart", 'clipboard-check','clock','grid'], menu_icon="cast", default_index=0)
     selected
     
+if 'order_approved_at' in all_df.columns:
+    all_df['order_approved_at'] = pd.to_datetime(all_df['order_approved_at'], errors='coerce')
+else:
+    print("Kolom 'order_approved_at' tidak ditemukan!")
 
 
 
