@@ -85,7 +85,7 @@ rfm=create_rfm(all_df)
 items_orders_df = pd.read_csv(url)
 avg_freight_by_status = items_orders_df.groupby('order_status')['freight_value'].mean().reset_index()
 
-cust_orders_df= pd.read_csv('url')
+cust_orders_df= pd.read_csv(url)
 avg_delivery_time_diff_by_city = cust_orders_df.groupby('customer_city')['delivery_time_difference'].mean()
 top_10_cities = avg_delivery_time_diff_by_city.sort_values(ascending=False).head(10)
 
