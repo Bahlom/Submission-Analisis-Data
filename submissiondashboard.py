@@ -52,7 +52,7 @@ def number_order_per_month(df):
 
 
 
-#def number_order_per_month(df):
+def number_order_per_month(df):
     monthly_df = df.resample(rule='M', on='order_approved_at').agg({
         "order_id": "size",
     })
