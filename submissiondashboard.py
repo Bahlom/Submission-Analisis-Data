@@ -24,7 +24,10 @@ if 'order_approved_at' in all_df.columns:
 else:
     print("Kolom 'order_approved_at' tidak ditemukan!")
 
-
+# change type str/obj -> datetime
+datetime_columns = ["order_approved_at"]
+for column in datetime_columns:
+    all_df[column] = pd.to_datetime(all_df[column])
 
 
 def number_order_per_month(df):
