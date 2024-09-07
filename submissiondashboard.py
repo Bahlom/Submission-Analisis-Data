@@ -29,14 +29,30 @@ if 'order_approved_at' in all_df.columns:
     print(all_df[['order_approved_at']].head())  # Debugging nilai
 else:
     print("Kolom 'order_approved_at' tidak ditemukan!")
-
-
-
-
-
-
-
 def number_order_per_month(df):
+    # Memastikan kolom 'order_approved_at' ada dan dalam format datetime
+    if 'order_approved_at' in df.columns:
+        df['order_approved_at'] = pd.to_datetime(df['order_approved_at'], errors='coerce')
+        df = df.dropna(subset=['order_approved_at'])
+        
+        # Melakukan resampling bulanan
+        monthly_df = df.resample(rule='M', on='order_approved_at').agg({
+            'order_id': 'count',  # Hitung jumlah pesanan
+            'payment_value': 'sum'  # Total nilai pembayaran
+        }).reset_index()
+        
+        monthly_df.rename(columns={'order_id': 'total_orders', 'payment_value': 'total_value'}, inplace=True)
+        return monthly_df
+    else:
+        raise KeyError("Kolom 'order_approved_at' tidak ditemukan dalam DataFrame!")
+
+
+
+
+
+
+
+#def number_order_per_month(df):
     monthly_df = df.resample(rule='M', on='order_approved_at').agg({
         "order_id": "size",
     })
@@ -53,8 +69,7 @@ def number_order_per_month(df):
     monthly_df = monthly_df.sort_values("month_numeric")
     monthly_df = monthly_df.drop("month_numeric", axis=1)
     return monthly_df 
-# Melanjutkan ke resampling
-daily_orders_df = number_order_per_month(all_df)
+
 def create_by_product_df(df):
     product_id_counts = df.groupby('product_category_name_english')['product_id'].count().reset_index()
     sorted_df = product_id_counts.sort_values(by='product_id', ascending=False)
