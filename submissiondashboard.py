@@ -10,8 +10,8 @@ import datetime as dt
 from streamlit_option_menu import option_menu
 
 
-all_df = pd.read_csv('all_data.csv')
 
+all_df = pd.read_csv("./all_data.csv")
 
 with st.sidebar:
     st.image("https://github.com/dicodingacademy/assets/raw/main/logo.png")
